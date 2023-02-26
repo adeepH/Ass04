@@ -7,7 +7,9 @@ Applying Machine Learning in Computational Linguistics
 
 1) Clone the repository
 2) run ``` pip install -r requirements.txt ```
-3) To generate the train, test, dev feature vector files run ` python get_features.py -df '/path/to/WaseemDatset.txt' -lex '/path/to/lexicon.txt`
+3) To generate the train, test, dev feature vector files run 
+
+` python get_features.py -df '/path/to/WaseemDatset.txt' -lex '/path/to/lexicon.txt`
 
 ## Usage
 
@@ -17,7 +19,7 @@ Applying Machine Learning in Computational Linguistics
 
 1) Adeep Hande
 2) Meesum Alam
-3) Estefanya
+3) Estefany
 
 ## License
 
