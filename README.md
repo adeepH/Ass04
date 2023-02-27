@@ -11,16 +11,6 @@ Applying Machine Learning in Computational Linguistics
 
 ` python get_features.py -df '/path/to/WaseemDatset.txt' -lex '/path/to/lexicon.txt`
 
-## Usage
-
-`python greet.py`
-
-## Contributing
-
-1) Adeep Hande
-2) Meesum Alam
-3) Estefany
-
 ## License
 
 [Apache 2.0](http://www.apache.org/licenses/LICENSE-2.0)
