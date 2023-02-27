@@ -15,6 +15,29 @@ def return_bool(row, lex:str):
         return 0
         
 
+def extract_labels(df):
+
+    label_list = []
+
+    for comment in list(df['text'].str.lower()):
+        if 'racism' in comment or 'racis' in comment or 'racist' in comment:
+            label_list.append('racism')
+        elif 'sex' in comment:
+            label_list.append('sexism')
+        else:
+            label_list.append('None')
+    
+    df['label'] = label_list
+    return df
+    # add script to remove it
+    #return pd.DataFrame(
+    #    {
+    #        'text': df['text'],
+    #        'label': label_list
+
+    #    }
+    #)
+
 def generate_features(df, lexicon):
 
     lexicons = lexicon['lexicons']
@@ -53,33 +76,39 @@ if __name__ == "__main__":
 
     df = pd.read_csv(args.df, sep='\t', header=None, names=['text'], index_col=False)
     df['text'] = df['text'].str.lower()
+    
     lexicon = pd.read_csv(args.lexicon, header=None, names=['lexicons'], index_col=False)
     lexicon['lexicons'] = lexicon['lexicons'].str.lower()
     #print(list(lexicon['lexicons'])[0])
+
     df_transformed = generate_features(df, lexicon)
-    
-    features = df_transformed.drop(columns=['text'])
+    print(df_transformed.head(5))
+    df_with_labels = extract_labels(df_transformed)
+    print(df_with_labels.head(5))
+    features = df_with_labels.drop(columns=['text'])
     train, dev, test = split_data(features)
 
-    if args.lexicon == "hate_lexicon_wiegand.txt":
+    if args.lexicon == "data/Wiegand_lexicon/hate_lexicon_wiegand.txt":
 
-        features.to_csv(f'hate_lexicon_wiegand_df.csv', index=False)
+        features.to_csv(
+            r'data/Wiegand_lexicon/hate_lexicon_wiegand_df.csv', index=False)
         print("writing train data")
-        train.to_csv(f'train_features_lexicon_wiegand.csv', index=False, header=False)
+        train.to_csv(r'data/Wiegand_lexicon/train_features_lexicon_wiegand.csv', index=False, header=False)
         print("Writing test data")
-        test.to_csv('test_features_lexicon_wiegand.csv', index=False, header=False)
+        test.to_csv(r'data/Wiegand_lexicon/test_features_lexicon_wiegand.csv', index=False, header=False)
         print("writing dev data")
-        dev.to_csv('dev_features_lexicon_wiegand.csv', index=False, header=False)
+        dev.to_csv(r'data/Wiegand_lexicon/dev_features_lexicon_wiegand.csv', index=False, header=False)
  
-    elif args.lexicon == "hate_lexicon_small.txt":
-        
-        features.to_csv(f'hate_lexicon_small_df.csv', index=False)
+    elif args.lexicon == "data/lexicon_small/hate_lexicon_small.txt":
+
+        features.to_csv(
+            r'data/lexicon_small/hate_lexicon_small_df.csv', index=False)
         print("writing train data")
-        train.to_csv(f'train_features_lexicon_small.csv', index=False, header=False)
+        train.to_csv(r'data/lexicon_small/train_features_lexicon_small.csv', index=False, header=False)
         print("Writing test data")
-        test.to_csv('test_features_lexicon_small.csv', index=False, header=False)
+        test.to_csv(r'data/lexicon_small/test_features_lexicon_small.csv', index=False, header=False)
         print("writing dev data")
-        dev.to_csv('dev_features_lexicon_small.csv', index=False, header=False)
+        dev.to_csv(r'data/lexicon_small/dev_features_lexicon_small.csv', index=False, header=False)
     
     print(df_transformed.shape)
     print(len(lexicon))
