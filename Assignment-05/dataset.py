@@ -9,11 +9,11 @@ def extract_labels(df):
 
     for comment in list(df['text'].str.lower()):
         if 'racism' in comment or 'racis' in comment or 'racist' in comment:
-            label_list.append('racism')
+            label_list.append('racism') 
         elif 'sex' in comment:
-            label_list.append('sexism')
+            label_list.append('sexism') 
         else:
-            label_list.append('None')
+            label_list.append('None') 
     # add script to remove it
     return pd.DataFrame(
         {
