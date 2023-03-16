@@ -1,9 +1,8 @@
 import pandas as pd
 import numpy as np
-from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
-from dataset import extract_labels, split_data
+from sklearn.feature_extraction.text import CountVectorizer
 import argparse
-from features import *
+from utils import *
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 if __name__ == "__main__":
