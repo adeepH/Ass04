@@ -4,7 +4,7 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 from dataset import extract_labels, split_data
 import argparse
 from features import *
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, confusion_matrix
 
 if __name__ == "__main__":
 
@@ -23,21 +23,29 @@ if __name__ == "__main__":
     args = parser.parse_args() 
 
     df = pd.read_csv(args.df, sep='\t', header=None, names=['text'], index_col=False)
-        
+    #print(df.head())
     df['text'] = df['text'].str.lower()
     df = extract_labels(df)
-    
-    if args.n_gram == "char":
-        x_train, y_train, x_dev, y_dev, x_test, y_test = char_ngrams(df) 
+
+    train, test = train_test_split(df, test_size=0.2, random_state=42)
+    try: 
+        x_train, y_train, x_test, y_test = ngrams(train, test, args.n_gram) 
         #train, dev, test = split_data(df_features)
 
-    else:
-        raise ValueError('Word ngrams has not been implemented yet')
+    except:
+         
+        raise KeyError('Acceptable types, word & char')
     
-    clf = models(args.model) 
-    clf.fit(x_train, y_train)
-    y_dev_pred = clf.predict(x_dev)
-    accuracy  = accuracy_score(y_dev, y_dev_pred) 
-    #cross_val_score(clf, x_dev, y_dev, cv=10)
+    
 
-    print(f'Accuracys: {accuracy}')
+    try: 
+            clf, model_list = models(args.model) 
+            clf.fit(x_train, y_train)
+            y_pred = clf.predict(x_test)
+            accuracy  = accuracy_score(y_test, y_pred) 
+            print(f'Accuracys: {accuracy}')
+            print(f'{confusion_matrix(y_test, y_pred)}')
+    except:
+
+        raise KeyError(f'The model has not been implemented yet. Please use the ones listed in python main.py --help')
+     

@@ -10,18 +10,19 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 from sklearn.model_selection import train_test_split, cross_val_score
 
-def char_ngrams(df):
+def ngrams(train, test, args):
 
-    train, test = train_test_split(df, test_size=0.2, random_state=42)
-    dev, test = train_test_split(test, test_size=0.5, random_state=42) 
+     
+    #dev, test = train_test_split(test, test_size=0.5, random_state=42) 
 
-    vectorizer = CountVectorizer(analyzer='char', ngram_range=(5,5))
+    vectorizer = CountVectorizer(analyzer=str(args), ngram_range=(1,1))
     x_train = vectorizer.fit_transform(train['text'])
-    x_dev = vectorizer.transform(dev['text'])
+    #x_dev = vectorizer.transform(dev['text'])
     x_test = vectorizer.transform(test['text'])
-    y_train, y_dev, y_test = train['label'], dev['label'], test['label']    
+    y_train, y_test = train['label'], test['label']    
 
-    return x_train, y_train, x_dev, y_dev, x_test, y_test
+    return x_train, y_train, x_test, y_test
+ 
 
 def models(args):
 
@@ -34,4 +35,4 @@ def models(args):
         'RF': RandomForestClassifier(),
     }
 
-    return model_dict[args]
+    return model_dict[args], list(model_dict.keys())

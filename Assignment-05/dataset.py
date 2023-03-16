@@ -6,15 +6,18 @@ import os
 def extract_labels(df):
     
     label_list = []
+    
+    #df['text'] = df['text'].str.lower()
 
     for comment in list(df['text'].str.lower()):
-        if 'racism' in comment or 'racis' in comment or 'racist' in comment:
+        if 'racism' in comment:
             label_list.append('racism') 
-        elif 'sex' in comment:
+        elif 'sexism' in comment:
             label_list.append('sexism') 
         else:
             label_list.append('None') 
     # add script to remove it
+    df['text'] = df['text'].apply(remove_keywords)
     return pd.DataFrame(
         {
             'text': df['text'],
@@ -22,6 +25,13 @@ def extract_labels(df):
          
         }
     )
+
+def remove_keywords(string):
+    labels = ['racism', 'sexism', 'None']
+    words = string.split()
+    filtered_words = [word for word in words if word.lower() not in labels]
+    return ' '.join(filtered_words) 
+
 
 def split_data(df):
 
