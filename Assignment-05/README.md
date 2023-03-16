@@ -1,4 +1,4 @@
-# Project Title
+# Assignment 05
 
 This repository contains the source code for our grad school Assignment 05.
 
@@ -22,8 +22,12 @@ To run the project, you need to follow these steps:
 2. Run the main script, with the necessary arguments.
 3. To see the installed models, run ```python main.py --help```
 
-![help](https://github.com/adeepH/CSCI_B_659-LING-L-645/tree/master/Assignment-05/data/help.png)
-
+<br> 
+<p align="center">
+  <img src="https://github.com/adeepH/CSCI_B_659-LING-L-645/blob/master/Assignment-05/data/help.png" width="60%"/>
+<br> 
+</p>
+<br> 
 
 ## Results
 
@@ -40,9 +44,15 @@ To run the project, you need to follow these steps:
     - Support Vector Classifier
 3. A snippet of Decision Tree Classifier when used for both Character ngrams and word ngrams:
 
-![res](https://github.com/adeepH/CSCI_B_659-LING-L-645/tree/master/Assignment-05/data/res.png)
+<br> 
+<p align="center">
+  <img src="https://github.com/adeepH/CSCI_B_659-LING-L-645/blob/master/Assignment-05/data/res.png" width="60%"/>
+<br> 
+</p>
+<br> 
 
 4. Surprisingly, Decision Tree classifier is scoring 99.96% on the test set with word ngrams and 93.79% on char ngrams, with said ngram range.
+5. Other classifiers scored in a similar way, with the scores dropping when ```n>=5 & n <=2```.
 
 
 ## Contributors
