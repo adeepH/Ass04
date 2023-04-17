@@ -11,7 +11,7 @@ df2 = pd.DataFrame({
     'label': df['task1_label'],
     'lang': df['language']
 })
-df2.to_csv('binary_labels.csv', index=False)
+df2.to_csv('binary_labels.csv')
 
 
                                                                         
