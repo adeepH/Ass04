@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 df = pd.read_json('training/EXIST2023_training.json') 
-
+df = pd.read_json('dev/EXIST2023_dev.json')
 
 class generate_labels():
 
@@ -47,5 +47,5 @@ majority_df = label_generator.majority_voting()
 #weighted_df = label_generator.weighted_voting()
 print(majority_df.head(15))
 
-majority_df.to_csv('majority_voting.csv', index=0)
+majority_df.to_csv('dev.csv', index=0)
 #print(weighted_df.head(15))
