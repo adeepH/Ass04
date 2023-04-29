@@ -20,17 +20,19 @@ class generate_labels():
             self.task1_label.append(majority_label)
 
         return pd.DataFrame({
-            'tweet':self.tweet,
-            'task1_label': self.task1_label,
-            'gender': self.gender,
-            'language': self.lang
+            'text':self.tweet,
+            'label': self.task1_label,
+         #   'gender': self.gender,
+         #   'language': self.lang
         }) 
 label_generator = generate_labels(train)
 majority_df = label_generator.majority_voting()
 #weighted_df = label_generator.weighted_voting()
 print(majority_df.head(15))
+majority_df['label'] = majority_df['label'].apply({'YES':1, 'NO':0}.get))
 majority_df.to_csv('train.csv', index=0)
 
 label_generator = generate_labels(dev)
 dev_df = label_generator.majority_voting()
+dev_df['label'] = dev_df['label'].apply({'YES':1, 'NO':0}.get))
 dev_df.to_csv('dev.csv', index=0)
