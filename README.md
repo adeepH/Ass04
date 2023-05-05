@@ -17,6 +17,7 @@ The repository is organized as follows:
 
 1. ```assignment4/```: This folder contains the resources and instructions for Assignment 4.
 2. ```assignment5/```: This folder contains the resources and instructions for Assignment 5. 
+3. ```FINAL PROJECT/```: This folder contains the resources and instructions for the project.
 
 ## Contributing
 - Adeep Hande (ahande@iu.edu)
